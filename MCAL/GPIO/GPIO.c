@@ -181,14 +181,21 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
 
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue) {
     
-    /* Variable for the address bus mask. */
-    uint8 busMask = pinValue << 2;
-    volatile uint32 *address = &(GPIODATA(PORT_A));
+    /* Variable for the portDataAddress bus mask. */
+    uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
+    
+    /* Pointer for holding the port portDataAddress. */
+    volatile uint32 *portportDataAddress = NULL;
+    
+    /* Variable for holding the address of the port's data register address. */
+    volatile uint32 portDataAddress = 0;
     
     if (ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
         switch (ptr_st_GPIO_config->en_GPIO_port) {
             case PORT_A:
-                (GPIODATA(PORT_A)) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_A)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_B:
                 *(&GPIODATA(PORT_B) + busMask) = pinValue;
