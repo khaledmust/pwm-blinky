@@ -36,20 +36,23 @@ MCAL/GPIO/GPIO.c(89): warning: default label in switch which covers all enumerat
 MCAL/GPIO/GPIO.c(112): warning: integer constant not in range of enumerated type 'en_GPIO_error_t' [-Wassign-enum]
     en_GPIO_error_t en_GPIO_error_CurrentError = 0;
                                                  ^
-MCAL/GPIO/GPIO.c(172): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
-            default:
-            ^
-MCAL/GPIO/GPIO.c(185): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+MCAL/GPIO/GPIO.c(161): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
     uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
           ~~~~~~~    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/GPIO/GPIO.c(215): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
+MCAL/GPIO/GPIO.c(191): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
             default:
             ^
-6 warnings generated.
+MCAL/GPIO/GPIO.c(209): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+    uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
+          ~~~~~~~    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/GPIO/GPIO.c(249): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
+            default:
+            ^
+7 warnings generated.
 compiling GPIO.c...
 linking...
-Program Size: Code=2720 RO-data=652 RW-data=16 ZI-data=608  
-".\Objects\blinky.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=2992 RO-data=652 RW-data=16 ZI-data=616  
+".\Objects\blinky.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -78,7 +81,7 @@ Package Vendor: Keil
       Include file:  Device/Include/TM4C123/TM4C123.h
       Source file:   Device/Source/system_TM4C123.c
       Source file:   Device/Source/ARM/startup_TM4C123.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

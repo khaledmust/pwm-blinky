@@ -148,11 +148,30 @@ en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
     return GPIO_STATUS_SUCCESS;
 }
 
+/**
+ * @brief Reads the state of a single pin.
+ * @param[in] ptr_st_GPIO_config    Address of the specified pin configuration strcuture.
+ * @param[in] ptr_pinValue          Address of the value where we stores the state of the pin.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t *ptr_pinValue) {
-    if (ptr_st_GPIO_config->en_GPIO_pinDir == INPUT) {
+    
+    
+    /* Variable for the portDataAddress bus mask. */
+    uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
+    
+    /* Pointer for holding the port portDataAddress. */
+    volatile uint32 *portportDataAddress = NULL;
+    
+    /* Variable for holding the address of the port's data register address. */
+    volatile uint32 portDataAddress = 0;
+    
+    if (ptr_st_GPIO_config->en_GPIO_pinDir == INPUT || ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
         switch (ptr_st_GPIO_config->en_GPIO_port) {
             case PORT_A:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_A, ptr_st_GPIO_config->en_GPIO_pin);
+                portportDataAddress = (&(GPIODATA(PORT_A)));
+                portDataAddress = (uint32)portportDataAddress + busMask;            
+                *ptr_pinValue = (uint8)(*(uint32 *)portDataAddress);
                 break;
             case PORT_B:
                 *ptr_pinValue = GET_BIT_STATUS(PORT_B, ptr_st_GPIO_config->en_GPIO_pin);
@@ -178,7 +197,12 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
     return GPIO_STATUS_SUCCESS;
 }
 
-
+/**
+ * @brief Reads the state of a single pin.
+ * @param[in] ptr_st_GPIO_config    Address of the specified pin configuration strcuture.
+ * @param[in] pinValue              The value to be written on the specified pin.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue) {
     
     /* Variable for the portDataAddress bus mask. */
@@ -198,19 +222,29 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
                 *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_B:
-                *(&GPIODATA(PORT_B) + busMask) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_B)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_C:
-                *(&GPIODATA(PORT_C) + busMask) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_C)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_D:
-                *(&GPIODATA(PORT_D) + busMask) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_D)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_E:
-                *(&GPIODATA(PORT_E) + busMask) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_E)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             case PORT_F:
-                *(&GPIODATA(PORT_F) + busMask) = pinValue;
+                portportDataAddress = (&(GPIODATA(PORT_F)));
+                portDataAddress = (uint32)portportDataAddress + busMask;
+                *(uint32 *)portDataAddress = pinValue;
                 break;
             default:
                 return GPIO_STATUS_INVALID_PORT_NUM;

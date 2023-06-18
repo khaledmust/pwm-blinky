@@ -6,6 +6,8 @@ st_GPIO_config_t myConfigArray[PORT_PINS_NUM] = {
     {PORT_A, PIN4, INPUT, DRIVE_2mA, PULL_UP},
 };
 
+uint8 myVar = 0;
+
 int main(void) {
     GPIO_Init(myConfigArray);
     
@@ -14,6 +16,7 @@ int main(void) {
 //    *(volatile uint32*) 0x40004008 = 0x01;
     
     GPIO_WritePin(&myConfigArray[0], 1);
+    GPIO_ReadPin(&myConfigArray[0], &myVar);
     
     while (1);
 }
