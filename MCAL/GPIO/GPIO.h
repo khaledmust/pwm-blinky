@@ -75,9 +75,29 @@ typedef struct {
     en_GPIO_pull_t          en_GPIO_pull;
 }st_GPIO_config_t;
 
-
+/**
+ * @brief Initializes a set of pins with the specified configuration.
+ * @param[in] ptr_st_GPIO_config    Address of the array of the specified pins.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config);
+
+
 en_GPIO_error_t GPIO_DeInit(const st_GPIO_config_t *ptr_st_GPIO_config);
+
+/**
+ * @brief Reads the state of a single pin.
+ * @param[in] ptr_st_GPIO_config    Address of the specified pin configuration strcuture.
+ * @param[in] ptr_pinValue          Address of the value where we stores the state of the pin.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t *ptr_pinValue);
+
+/**
+ * @brief Reads the state of a single pin.
+ * @param[in] ptr_st_GPIO_config    Address of the specified pin configuration strcuture.
+ * @param[in] pinValue              The value to be written on the specified pin.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);

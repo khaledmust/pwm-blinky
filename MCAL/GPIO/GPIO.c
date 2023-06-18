@@ -1,6 +1,7 @@
 
 #include "./GPIO.h"
 #include "GPIO_private.h"
+#include <assert.h>
 
 #define	PORT_LOCK_VALUE     (uint32_t)(0x4C4F434B)
 #define BIT_MASKING_OFFSET  (uint8_t)(2)
@@ -46,6 +47,7 @@ static en_GPIO_error_t GPIO_SetDirection(en_GPIO_port_t en_GPIO_port, en_GPIO_pi
  * @return en_GPIO_error_t
  */
 static en_GPIO_error_t GPIO_SetDriveCurrent(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_driveCurrent_t en_GPIO_driveCurrent) {
+    assert(en_GPIO_driveCurrent == DRIVE_2mA || en_GPIO_driveCurrent  == DRIVE_4mA || en_GPIO_driveCurrent == DRIVE_8mA);
     switch (en_GPIO_driveCurrent) {
         case DRIVE_2mA:
             SET_BIT(GPIODR2R(en_GPIO_port), en_GPIO_pin);
@@ -62,8 +64,6 @@ static en_GPIO_error_t GPIO_SetDriveCurrent(en_GPIO_port_t en_GPIO_port, en_GPIO
             CLR_BIT(GPIODR4R(en_GPIO_port), en_GPIO_pin);
             SET_BIT(GPIODR8R(en_GPIO_port), en_GPIO_pin);
             break;
-        default:
-            return GPIO_STATUS_SET_DRIVE_CURRENT_FAILED;
     }
     return GPIO_STATUS_SUCCESS;
 }
@@ -76,6 +76,7 @@ static en_GPIO_error_t GPIO_SetDriveCurrent(en_GPIO_port_t en_GPIO_port, en_GPIO
  * @return en_GPIO_error_t
  */
 static en_GPIO_error_t GPIO_SetPull(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_pull_t en_GPIO_pull) {
+    assert(en_GPIO_pull == PULL_UP || en_GPIO_pull == PULL_DOWN || en_GPIO_pull == OPEN_DRAIN);
     switch (en_GPIO_pull) {
         case PULL_UP:
             SET_BIT(GPIOPUR(en_GPIO_port), en_GPIO_pin);
@@ -86,8 +87,6 @@ static en_GPIO_error_t GPIO_SetPull(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t e
         case OPEN_DRAIN:
             SET_BIT(GPIOODR(en_GPIO_port), en_GPIO_pin);
             break;
-        default:
-            return GPIO_STATUS_SET_PULL_FAILED;
     }
     return GPIO_STATUS_SUCCESS;
 }
@@ -103,13 +102,18 @@ static en_GPIO_error_t GPIO_DigitalEnable(en_GPIO_port_t en_GPIO_port, en_GPIO_p
     return GPIO_STATUS_SUCCESS;
 }
 
+/**
+ * @brief Initializes a set of pins with the specified configuration.
+ * @param[in] ptr_st_GPIO_config    Address of the array of the specified pins.
+ * @return en_GPIO_error_t
+ */
 en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
     
     /* Variable for loop counter */
     uint8 u8_pinCounter = 0;
     
     /* Variable for the current API status */
-    en_GPIO_error_t en_GPIO_error_CurrentError = 0;
+    en_GPIO_error_t en_GPIO_error_CurrentError;
     
     if (ptr_st_GPIO_config != NULL) {
         
@@ -156,6 +160,8 @@ en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
  */
 en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t *ptr_pinValue) {
     
+    /* Variable for holding the port number. */
+    uint8 portNum = ptr_st_GPIO_config->en_GPIO_port;
     
     /* Variable for the portDataAddress bus mask. */
     uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
@@ -167,7 +173,8 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
     volatile uint32 portDataAddress = 0;
     
     if (ptr_st_GPIO_config->en_GPIO_pinDir == INPUT || ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
-        switch (ptr_st_GPIO_config->en_GPIO_port) {
+        assert(portNum == PORT_A || portNum == PORT_B || portNum == PORT_C || portNum == PORT_D || portNum == PORT_E || portNum == PORT_F);
+        switch (portNum) {
             case PORT_A:
                 portportDataAddress = (&(GPIODATA(PORT_A)));
                 portDataAddress = (uint32)portportDataAddress + busMask;            
@@ -188,8 +195,6 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
             case PORT_F:
                 *ptr_pinValue = GET_BIT_STATUS(PORT_F, ptr_st_GPIO_config->en_GPIO_pin);
                 break;
-            default:
-                return GPIO_STATUS_INVALID_PORT_NUM;
         }
     } else {
         return GPIO_STATUS_INVALID_PIN_DIR;
@@ -205,6 +210,9 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
  */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue) {
     
+    /* Variable for holding the port number. */
+    uint8 portNum = ptr_st_GPIO_config->en_GPIO_port;
+    
     /* Variable for the portDataAddress bus mask. */
     uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
     
@@ -215,7 +223,8 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
     volatile uint32 portDataAddress = 0;
     
     if (ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
-        switch (ptr_st_GPIO_config->en_GPIO_port) {
+        assert(portNum == PORT_A || portNum == PORT_B || portNum == PORT_C || portNum == PORT_D || portNum == PORT_E || portNum == PORT_F);
+        switch (portNum) {
             case PORT_A:
                 portportDataAddress = (&(GPIODATA(PORT_A)));
                 portDataAddress = (uint32)portportDataAddress + busMask;
@@ -246,8 +255,6 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
                 portDataAddress = (uint32)portportDataAddress + busMask;
                 *(uint32 *)portDataAddress = pinValue;
                 break;
-            default:
-                return GPIO_STATUS_INVALID_PORT_NUM;
         }
     } else {
         return GPIO_STATUS_INVALID_PIN_DIR;

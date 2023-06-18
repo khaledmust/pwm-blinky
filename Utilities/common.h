@@ -19,7 +19,10 @@
 #define ERROR                 (-1)
 #define INVALID_INPUT         (-2)
 #define NULL                  ((void *)0)
-											        
+#define HIGH                  (1)
+#define LOW                   (0)
+
+
 #ifndef TRUE                  
 #define TRUE                  (1)
 #endif                        
