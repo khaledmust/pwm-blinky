@@ -9,5 +9,7 @@ st_GPIO_config_t myConfigArray[PORT_PINS_NUM] = {
 int main(void) {
     GPIO_Init(myConfigArray);
     
+    GPIO_WritePin(&myConfigArray[0], 0x26);
+    
     while (1);
 }

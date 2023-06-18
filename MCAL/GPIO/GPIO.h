@@ -50,6 +50,8 @@ typedef enum {
     GPIO_STATUS_SET_DIRECTION_FAILED        =   102,
     GPIO_STATUS_SET_DRIVE_CURRENT_FAILED    =   103,
     GPIO_STATUS_SET_PULL_FAILED             =   104,
+    GPIO_STATUS_INVALID_PIN_DIR,
+    GPIO_STATUS_INVALID_PORT_NUM,
     GPIO_STATUS_INVALID_CONFIG_ARRAY        =   105
 }en_GPIO_error_t;
 
@@ -77,5 +79,5 @@ typedef struct {
 en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config);
 en_GPIO_error_t GPIO_DeInit(const st_GPIO_config_t *ptr_st_GPIO_config);
 en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t *ptr_pinValue);
-void GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
+en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);

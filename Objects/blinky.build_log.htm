@@ -27,15 +27,6 @@ Project File Date:  06/18/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-compiling GPIO_config.c...
-main.c(3): warning: no previous extern declaration for non-static variable 'myConfigArray' [-Wmissing-variable-declarations]
-st_GPIO_config_t myConfigArray[PORT_PINS_NUM] = {
-                 ^
-main.c(3): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-st_GPIO_config_t myConfigArray[PORT_PINS_NUM] = {
-^
-1 warning generated.
-compiling main.c...
 MCAL/GPIO/GPIO.c(65): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
         default:
         ^
@@ -45,150 +36,26 @@ MCAL/GPIO/GPIO.c(89): warning: default label in switch which covers all enumerat
 MCAL/GPIO/GPIO.c(112): warning: integer constant not in range of enumerated type 'en_GPIO_error_t' [-Wassign-enum]
     en_GPIO_error_t en_GPIO_error_CurrentError = 0;
                                                  ^
-MCAL/GPIO/GPIO.c(148): warning: non-void function does not return a value in all control paths [-Wreturn-type]
-}
-^
-4 warnings generated.
+MCAL/GPIO/GPIO.c(172): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
+            default:
+            ^
+MCAL/GPIO/GPIO.c(185): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+    uint8 busMask = pinValue << 2;
+          ~~~~~~~   ~~~~~~~~~^~~~
+MCAL/GPIO/GPIO.c(186): warning: incompatible pointer types initializing 'volatile uint32 *' (aka 'volatile unsigned long *') with an expression of type 'volatile uint32_t *' (aka 'volatile unsigned int *') [-Wincompatible-pointer-types]
+    volatile uint32 *address = &(GPIODATA(PORT_A));
+                     ^         ~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO.c(208): warning: default label in switch which covers all enumeration values [-Wcovered-switch-default]
+            default:
+            ^
+MCAL/GPIO/GPIO.c(186): warning: unused variable 'address' [-Wunused-variable]
+    volatile uint32 *address = &(GPIODATA(PORT_A));
+                     ^
+8 warnings generated.
 compiling GPIO.c...
-RTE/Device/TM4C123GH6PM/system_TM4C123.c(13): warning: In file included from...
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(338): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(357): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(713): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(729): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(774): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(779): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(872): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(885): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(892): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(897): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(904): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(910): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(917): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(924): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(929): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(936): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(942): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(949): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(956): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(961): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(968): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(974): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(981): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(988): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(993): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1000): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1006): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1013): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1020): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1025): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1032): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1038): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1045): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1052): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1057): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1064): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1070): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1077): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1084): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1089): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1096): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1102): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1251): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-44 warnings generated.
-compiling system_TM4C123.c...
 linking...
-Program Size: Code=2468 RO-data=652 RW-data=16 ZI-data=608  
-".\Objects\blinky.axf" - 0 Error(s), 49 Warning(s).
+Program Size: Code=2708 RO-data=652 RW-data=16 ZI-data=608  
+".\Objects\blinky.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -217,7 +84,7 @@ Package Vendor: Keil
       Include file:  Device/Include/TM4C123/TM4C123.h
       Source file:   Device/Source/system_TM4C123.c
       Source file:   Device/Source/ARM/startup_TM4C123.s
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
