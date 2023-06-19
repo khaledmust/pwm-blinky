@@ -1,3 +1,5 @@
+#ifndef GPIO_H_
+#define GPIO_H_
 
 #include "std_types.h"
 #include "common.h"
@@ -9,7 +11,7 @@
  * Specifies the number of the port.
  */
 typedef enum {
-    PORT_A = 0, PORT_B = 1, PORT_C = 3, PORT_D = 4, PORT_E = 5, PORT_F = 6
+    PORT_A = 0, PORT_B = 1, PORT_C = 2, PORT_D = 3, PORT_E = 4, PORT_F = 5
 }en_GPIO_port_t;
 
 /**
@@ -101,3 +103,5 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
  */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);
+
+#endif /* GPIO_H_ */

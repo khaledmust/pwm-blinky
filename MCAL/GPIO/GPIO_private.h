@@ -28,7 +28,7 @@
  * @defgroup GPIORegisters GPIO Registers
  * @{
  */
-#define GPIODATA(x)     *((volatile uint32*)(GPIO_OFFSET(x)+0x00))    /* GPIO Data 0x3FC*/
+#define GPIODATA(x)     *((volatile uint32*)(GPIO_OFFSET(x)+0x3FC))    /* GPIO Data 0x3FC*/
 #define GPIODIR(x)      *((volatile uint32*)(GPIO_OFFSET(x)+0x400))   /* GPIO Direction */
 #define GPIOIS(x)       *((volatile uint32*)(GPIO_OFFSET(x)+0x404))   /* GPIO Interrupt Sense */
 #define GPIOIBE(x)      *((volatile uint32*)(GPIO_OFFSET(x)+0x408))   /* GPIO Interrupt Both Edges */
