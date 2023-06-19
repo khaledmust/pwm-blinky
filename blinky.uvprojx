@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED</IncludePath>
+              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -453,6 +453,46 @@
               <FileName>led_config.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\ECUAL\LED\led_config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Push button</GroupName>
+          <Files>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ECUAL\button\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ECUAL\button\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>button_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ECUAL\button\button_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>button_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ECUAL\button\button_config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application</GroupName>
+          <Files>
+            <File>
+              <FileName>application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Application\application.c</FilePath>
+            </File>
+            <File>
+              <FileName>application.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Application\application.h</FilePath>
             </File>
           </Files>
         </Group>

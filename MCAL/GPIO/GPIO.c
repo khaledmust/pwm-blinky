@@ -80,12 +80,21 @@ static en_GPIO_error_t GPIO_SetPull(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t e
     switch (en_GPIO_pull) {
         case PULL_UP:
             SET_BIT(GPIOPUR(en_GPIO_port), en_GPIO_pin);
+            CLR_BIT(GPIOPDR(en_GPIO_port), en_GPIO_pin);
+            CLR_BIT(GPIOODR(en_GPIO_port), en_GPIO_pin);
+			CLR_BIT(GPIOSLR(en_GPIO_port), en_GPIO_pin);
             break;
         case PULL_DOWN:
-            SET_BIT(GPIOPDR(en_GPIO_port), en_GPIO_pin);
+            CLR_BIT(GPIOPUR(en_GPIO_port), en_GPIO_pin);
+			SET_BIT(GPIOPDR(en_GPIO_port), en_GPIO_pin);
+			CLR_BIT(GPIOODR(en_GPIO_port), en_GPIO_pin);
+			CLR_BIT(GPIOSLR(en_GPIO_port), en_GPIO_pin);
             break;
         case OPEN_DRAIN:
-            SET_BIT(GPIOODR(en_GPIO_port), en_GPIO_pin);
+            CLR_BIT(GPIOPUR(en_GPIO_port), en_GPIO_pin);
+			CLR_BIT(GPIOPDR(en_GPIO_port), en_GPIO_pin);
+			SET_BIT(GPIOODR(en_GPIO_port), en_GPIO_pin);
+			CLR_BIT(GPIOSLR(en_GPIO_port), en_GPIO_pin);
             break;
     }
     return GPIO_STATUS_SUCCESS;
@@ -109,47 +118,45 @@ static en_GPIO_error_t GPIO_DigitalEnable(en_GPIO_port_t en_GPIO_port, en_GPIO_p
  */
 en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
     
-    /* Variable for loop counter */
-    uint8 u8_pinCounter = 0;
-    
     /* Variable for the current API status */
     en_GPIO_error_t en_GPIO_error_CurrentError;
     
     if (ptr_st_GPIO_config != NULL) {
         
-        for (u8_pinCounter = 0; u8_pinCounter < PORT_PINS_NUM; u8_pinCounter++) {
-            /* 1. Enable the clodk to the port */
-            en_GPIO_error_CurrentError = GPIO_EnableClock(ptr_st_GPIO_config[u8_pinCounter].en_GPIO_port);
-            if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
-                return GPIO_STATUS_CLOCK_FAILED;
-            }
-            
-            /* 2. Set the direction of the GPIO port pins */
-            en_GPIO_error_CurrentError = GPIO_SetDirection(ptr_st_GPIO_config[u8_pinCounter].en_GPIO_port, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pin, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pinDir);
-            if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
-                return en_GPIO_error_CurrentError;
-            }
-            
-            /* 3. Set the drive strenght of the pin */
-            en_GPIO_error_CurrentError = GPIO_SetDriveCurrent(ptr_st_GPIO_config[u8_pinCounter].en_GPIO_port, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pin, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_driveCurrent);
-            if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
-                return en_GPIO_error_CurrentError;
-            }
-            
-            /* 4. Set the pull state for the pin */
-            en_GPIO_error_CurrentError = GPIO_SetPull(ptr_st_GPIO_config[u8_pinCounter].en_GPIO_port, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pin, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pull);
-            if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
-                return en_GPIO_error_CurrentError;
-            }
-            
-            /* 5. Enable the GPIO pin as digital */
-            en_GPIO_error_CurrentError = GPIO_DigitalEnable(ptr_st_GPIO_config[u8_pinCounter].en_GPIO_port, ptr_st_GPIO_config[u8_pinCounter].en_GPIO_pin);
-            if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
-                return en_GPIO_error_CurrentError;
-            }
+        /* 1. Enable the clodk to the port */
+        en_GPIO_error_CurrentError = GPIO_EnableClock(ptr_st_GPIO_config->en_GPIO_port);
+        if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
+            return GPIO_STATUS_CLOCK_FAILED;
         }
+        
+        /* 2. Set the direction of the GPIO port pins */
+        en_GPIO_error_CurrentError = GPIO_SetDirection(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_pinDir);
+        if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
+            return en_GPIO_error_CurrentError;
+        }
+        
+        /* 3. Set the drive strenght of the pin */
+        en_GPIO_error_CurrentError = GPIO_SetDriveCurrent(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_driveCurrent);
+        if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
+            return en_GPIO_error_CurrentError;
+        }
+        
+        /* 4. Set the pull state for the pin */
+        en_GPIO_error_CurrentError = GPIO_SetPull(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_pull);
+        if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
+            return en_GPIO_error_CurrentError;
+        }
+        
+        /* 5. Enable the GPIO pin as digital */
+        en_GPIO_error_CurrentError = GPIO_DigitalEnable(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin);
+        if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
+            return en_GPIO_error_CurrentError;
+        }
+        return GPIO_STATUS_SUCCESS;
+    } else {
+        /* return Failed */
     }
-    return GPIO_STATUS_SUCCESS;
+    
 }
 
 /**
@@ -162,38 +169,29 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
     
     /* Variable for holding the port number. */
     uint8 portNum = ptr_st_GPIO_config->en_GPIO_port;
-    
-    /* Variable for the portDataAddress bus mask. */
-    uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
-    
-    /* Pointer for holding the port portDataAddress. */
-    volatile uint32 *portportDataAddress = NULL;
-    
-    /* Variable for holding the address of the port's data register address. */
-    volatile uint32 portDataAddress = 0;
+    uint8 pinNum = ptr_st_GPIO_config->en_GPIO_pin;
     
     if (ptr_st_GPIO_config->en_GPIO_pinDir == INPUT || ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
         assert(portNum == PORT_A || portNum == PORT_B || portNum == PORT_C || portNum == PORT_D || portNum == PORT_E || portNum == PORT_F);
+  
         switch (portNum) {
             case PORT_A:
-                portportDataAddress = (&(GPIODATA(PORT_A)));
-                portDataAddress = (uint32)portportDataAddress + busMask;            
-                *ptr_pinValue = (uint8)(*(uint32 *)portDataAddress);
+				*ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_A), pinNum);
                 break;
             case PORT_B:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_B, ptr_st_GPIO_config->en_GPIO_pin);
+                *ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_B), pinNum);
                 break;
             case PORT_C:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_C, ptr_st_GPIO_config->en_GPIO_pin);
+                *ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_C), pinNum);
                 break;
             case PORT_D:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_D, ptr_st_GPIO_config->en_GPIO_pin);
+                *ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_D), pinNum);
                 break;
             case PORT_E:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_E, ptr_st_GPIO_config->en_GPIO_pin);
+                *ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_E), pinNum);
                 break;
             case PORT_F:
-                *ptr_pinValue = GET_BIT_STATUS(PORT_F, ptr_st_GPIO_config->en_GPIO_pin);
+                *ptr_pinValue = GET_BIT_STATUS(GPIODATA(PORT_F), pinNum);
                 break;
         }
     } else {
@@ -213,47 +211,65 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
     /* Variable for holding the port number. */
     uint8 portNum = ptr_st_GPIO_config->en_GPIO_port;
     
-    /* Variable for the portDataAddress bus mask. */
-    uint8 busMask = (((ptr_st_GPIO_config->en_GPIO_pin) + 1) << 2);
-    
-    /* Pointer for holding the port portDataAddress. */
-    volatile uint32 *portportDataAddress = NULL;
-    
-    /* Variable for holding the address of the port's data register address. */
-    volatile uint32 portDataAddress = 0;
+    /* Varualbe for holding the pin number. */
+    uint8 pinNum = ptr_st_GPIO_config->en_GPIO_pin;
     
     if (ptr_st_GPIO_config->en_GPIO_pinDir == OUTPUT) {
         assert(portNum == PORT_A || portNum == PORT_B || portNum == PORT_C || portNum == PORT_D || portNum == PORT_E || portNum == PORT_F);
         switch (portNum) {
             case PORT_A:
-                portportDataAddress = (&(GPIODATA(PORT_A)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_A), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_A), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
             case PORT_B:
-                portportDataAddress = (&(GPIODATA(PORT_B)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_B), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_B), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
             case PORT_C:
-                portportDataAddress = (&(GPIODATA(PORT_C)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_C), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_C), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
             case PORT_D:
-                portportDataAddress = (&(GPIODATA(PORT_D)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_D), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_D), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
             case PORT_E:
-                portportDataAddress = (&(GPIODATA(PORT_E)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_E), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_E), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
             case PORT_F:
-                portportDataAddress = (&(GPIODATA(PORT_F)));
-                portDataAddress = (uint32)portportDataAddress + busMask;
-                *(uint32 *)portDataAddress = pinValue;
+                if(pinValue == HIGH) {
+                    SET_BIT(GPIODATA(PORT_F), pinNum);
+                } else if(pinValue == LOW) {
+                    CLR_BIT(GPIODATA(PORT_F), pinNum);
+                } else {
+                    //error handling
+                    }
                 break;
         }
     } else {

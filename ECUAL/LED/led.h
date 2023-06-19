@@ -1,19 +1,27 @@
+/*
+**@file     : led.h
+**@brief    : This is header file for the LED API.
+**@author   : ANAS MAHMOUD
+**@date     : 18 june 2023
+**@version  : 0.1
+*/
+
+
 #ifndef LED_H_
 #define LED_H_
 
 #include "GPIO/GPIO.h"
 
+void Led_Init(st_GPIO_config_t *ptr_st_LED_config);
 
-void Led_Init(st_GPIO_config_t* Led_Config);
+void LED_GreenOn(st_GPIO_config_t *ptr_st_LED_config);
 
-void Led_Set_Green(st_GPIO_config_t* Led_Config);
+void LED_BlueOn(st_GPIO_config_t *ptr_st_LED_config);
 
-void Led_Set_Blue(st_GPIO_config_t* Led_Config);
+void LED_RedOn(st_GPIO_config_t *ptr_st_LED_config);
 
-void Led_Set_Red(st_GPIO_config_t* Led_Config);
+void LED_AllOn(st_GPIO_config_t *ptr_st_LED_config);
 
-void Leds_on(st_GPIO_config_t* Led_Config);
+void LED_AllOff(st_GPIO_config_t *ptr_st_LED_config);
 
-void Leds_off(st_GPIO_config_t* Led_Config);
-
-#endif
+#endif /* LED_H_ */

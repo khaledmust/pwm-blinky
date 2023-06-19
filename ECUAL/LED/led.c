@@ -1,53 +1,58 @@
+/*
+**@file     : led.h
+**@brief    : This is source file for the LED API.
+**@author   : ANAS MAHMOUD
+**@date     : 18 june 2023
+**@version  : 0.1
+*/
+
+
 #include "led.h"
 #include "common.h"
+#include "led_config.h"
 
-void Led_Init(st_GPIO_config_t* Led_Config)
+
+void Led_Init(st_GPIO_config_t *ptr_st_LED_config)
 {
-	GPIO_Init(Led_Config);
+    /* Variable for counting. */
+    uint8 pinCounter = 0;
+    for (pinCounter = 0; pinCounter < PORT_PINS_NUM; pinCounter++) {
+        GPIO_Init(&ptr_st_LED_config[pinCounter]);
+    }
+}
+
+void LED_RedOn(st_GPIO_config_t *ptr_st_LED_config)
+{
+	GPIO_WritePin(&ptr_st_LED_config[0], HIGH);	
+	GPIO_WritePin(&ptr_st_LED_config[1], LOW);
+	GPIO_WritePin(&ptr_st_LED_config[2], LOW);
+}
+
+void LED_BlueOn(st_GPIO_config_t* ptr_st_LED_config)
+{	
+	GPIO_WritePin(&ptr_st_LED_config[0], LOW);
+	GPIO_WritePin(&ptr_st_LED_config[1], HIGH);
+    GPIO_WritePin(&ptr_st_LED_config[2], LOW);
 }
 
 
-void Led_Set_Red(st_GPIO_config_t* Led_Config)
-{
-	GPIO_WritePin(&Led_Config[0],HIGH);
-	GPIO_WritePin(&Led_Config[1],LOW);
-	GPIO_WritePin(&Led_Config[2],LOW);
+void LED_GreenOn(st_GPIO_config_t *ptr_st_LED_config)
+{	
+	GPIO_WritePin(&ptr_st_LED_config[0], LOW);
+	GPIO_WritePin(&ptr_st_LED_config[1], LOW);
+    GPIO_WritePin(&ptr_st_LED_config[2], HIGH);
 }
 
-
-void Led_Set_Green(st_GPIO_config_t* Led_Config)
+void LED_AllOn(st_GPIO_config_t *ptr_st_LED_config)
 {
-	GPIO_WritePin(&Led_Config[1],HIGH);	
-	GPIO_WritePin(&Led_Config[0],LOW);
-	GPIO_WritePin(&Led_Config[2],LOW);
+	 GPIO_WritePin(&ptr_st_LED_config[0], HIGH);
+	 GPIO_WritePin(&ptr_st_LED_config[1], HIGH);
+	 GPIO_WritePin(&ptr_st_LED_config[2], HIGH);
 }
 
-
-void Led_Set_Blue(st_GPIO_config_t* Led_Config)
+void LED_AllOff(st_GPIO_config_t *ptr_st_LED_config)
 {
-
-	GPIO_WritePin(&Led_Config[2],HIGH);
-	GPIO_WritePin(&Led_Config[0],LOW);
-	GPIO_WritePin(&Led_Config[1],LOW);
+	GPIO_WritePin(&ptr_st_LED_config[0], LOW);
+	GPIO_WritePin(&ptr_st_LED_config[1], LOW);
+	GPIO_WritePin(&ptr_st_LED_config[2], LOW);
 }
-
-
-void Leds_on(st_GPIO_config_t* Led_Config)
-{
-	 GPIO_WritePin(&Led_Config[0],HIGH);
-	 GPIO_WritePin(&Led_Config[1],HIGH);
-	 GPIO_WritePin(&Led_Config[2],HIGH);
-}
-
-
-
-void Leds_off(st_GPIO_config_t* Led_Config)
-{
-	GPIO_WritePin(&Led_Config[0],LOW);
-	GPIO_WritePin(&Led_Config[1],LOW);
-	GPIO_WritePin(&Led_Config[2],LOW);
-}
-
-
-
-

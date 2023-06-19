@@ -1,10 +1,8 @@
+
 #ifndef GPIO_H_
 #define GPIO_H_
-
 #include "std_types.h"
 #include "common.h"
-
-#define PORT_PINS_NUM 3
 
 /**
  * @enum en_GPIO_port_t
@@ -104,4 +102,4 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);
 
-#endif /* GPIO_H_ */
+#endif
