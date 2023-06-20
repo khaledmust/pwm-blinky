@@ -76,6 +76,5 @@ void APP_Start(void) {
 //            g_APP_SequenceState = 0;
 //            g_APP_DebounceFlag = 0;
 //            break;
-
 //    }
 //}

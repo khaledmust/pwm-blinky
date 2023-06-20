@@ -8,6 +8,7 @@
 
 #include "led_config.h"
 
+/* User configuration array. */
 st_GPIO_config_t usr_led_config [PORT_PINS_NUM] = {
     {PORT_F, PIN1, OUTPUT,DRIVE_2mA, PULL_DOWN},   /* Red Led */ 
     {PORT_F, PIN2, OUTPUT,DRIVE_4mA, PULL_DOWN},   /* Blue Led */

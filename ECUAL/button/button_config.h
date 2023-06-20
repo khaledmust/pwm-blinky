@@ -12,8 +12,10 @@
 #include "GPIO/GPIO.h"
 #include "button.h"
 
+/* Number of push buttons to configured. */
 #define PUSH_BUTTON_NUM 1
 
+/* User configuration array. */
 extern st_GPIO_config_t usr_button_config [PUSH_BUTTON_NUM];
 
 #endif /* BUTTON_CONFIG_H_ */

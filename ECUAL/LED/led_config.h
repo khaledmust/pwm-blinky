@@ -11,7 +11,10 @@
 
 #include "GPIO/GPIO.h"
 
+/* Number of LEDs to be configured. */
 #define PORT_PINS_NUM 3
+
+/* User configuration array. */
 extern st_GPIO_config_t usr_led_config [PORT_PINS_NUM];
 
 #endif /* LED_CONFIG_H_ */

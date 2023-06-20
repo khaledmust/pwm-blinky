@@ -9,6 +9,7 @@
 #include "button.h"
 static uint16 debounceCount = 0;
 
+
 static void BUTTON_Debounce(st_GPIO_config_t *usr_buttonConfig, en_button_state_t *buttonState) {
     en_button_state_t currentState = 0;
     en_button_state_t previousState = 0;
@@ -38,6 +39,10 @@ static void BUTTON_Debounce(st_GPIO_config_t *usr_buttonConfig, en_button_state_
     }
 }
 
+/**
+ * @brief Initializes the button pin.
+ * @param[in] Button_config     Address of the configuration array.
+ */
 void BUTTON_Init(st_GPIO_config_t *usr_buttonConfig)
 {
     uint8 pinCounter = 0;
@@ -46,7 +51,11 @@ void BUTTON_Init(st_GPIO_config_t *usr_buttonConfig)
     }
 }
 
-
+/**
+ * @brief Initializes the button pin.
+ * @param[in] usr_buttonConfig Address of the configuration array.
+ * @param[in] value         Address of the variables to store the state of push button.
+ */
 void BUTTON_IsPressed(st_GPIO_config_t *usr_buttonConfig, en_button_state_t *buttonState) {
     BUTTON_Debounce(usr_buttonConfig, buttonState);
 }
