@@ -13,7 +13,7 @@
 #include "GPIO/GPIO.h"
 #include "button_config.h"
 
-#define DEBOUNCE_THRESHOLD  5000 //9000
+#define DEBOUNCE_THRESHOLD  9000 //9000
 
 typedef enum {
     BUTTON_NotPressed = 0, BUTTON_Pressed = 1

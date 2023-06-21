@@ -73,7 +73,6 @@ Section Cross References
     systick.o(.ARM.exidx.text.SYSTICK_StartTimer) refers to systick.o(.text.SYSTICK_StartTimer) for [Anonymous Symbol]
     systick.o(.ARM.exidx.text.SYSTICK_StopTimer) refers to systick.o(.text.SYSTICK_StopTimer) for [Anonymous Symbol]
     systick.o(.ARM.exidx.text.SYSTICK_ResetTimer) refers to systick.o(.text.SYSTICK_ResetTimer) for [Anonymous Symbol]
-    systick.o(.text.SYSTICK_Delay_ms) refers to system_tm4c123.o(.data.SystemCoreClock) for SystemCoreClock
     systick.o(.text.SYSTICK_Delay_ms) refers to systick.o(.text.SYSTICK_ResetTimer) for SYSTICK_ResetTimer
     systick.o(.text.SYSTICK_Delay_ms) refers to systick.o(.text.SYSTICK_StartTimer) for SYSTICK_StartTimer
     systick.o(.text.SYSTICK_Delay_ms) refers to systick.o(.text.SYSTICK_GetStatus) for SYSTICK_GetStatus
@@ -261,8 +260,9 @@ Removing Unused input sections from the image.
     Removing system_tm4c123.o(.text.getOscClk), (360 bytes).
     Removing system_tm4c123.o(.ARM.exidx.text.getOscClk), (8 bytes).
     Removing system_tm4c123.o(.ARM.exidx.text.SystemInit), (8 bytes).
+    Removing system_tm4c123.o(.data.SystemCoreClock), (4 bytes).
 
-44 unused section(s) (total 948 bytes) removed from the image.
+45 unused section(s) (total 952 bytes) removed from the image.
 
 ==============================================================================
 
@@ -701,7 +701,7 @@ Image Symbol Table
     LED_GreenOn                              0x00001631   Thumb Code    40  led.o(.text.LED_GreenOn)
     LED_RedOn                                0x00001659   Thumb Code    40  led.o(.text.LED_RedOn)
     Led_Init                                 0x00001681   Thumb Code    62  led.o(.text.Led_Init)
-    SYSTICK_Delay_ms                         0x000016c1   Thumb Code    94  systick.o(.text.SYSTICK_Delay_ms)
+    SYSTICK_Delay_ms                         0x000016c1   Thumb Code    96  systick.o(.text.SYSTICK_Delay_ms)
     SYSTICK_Init                             0x0000174d   Thumb Code   124  systick.o(.text.SYSTICK_Init)
     SYSTICK_ResetTimer                       0x000017c9   Thumb Code    14  systick.o(.text.SYSTICK_ResetTimer)
     SYSTICK_StartTimer                       0x000017d9   Thumb Code    18  systick.o(.text.SYSTICK_StartTimer)
@@ -713,10 +713,9 @@ Image Symbol Table
     __fplib_config_pureend_doubles           0x00001939   Thumb Code     0  fpinit.o(x$fpl$fpinit)
     Region$$Table$$Base                      0x00001a88   Number         0  anon$$obj.o(Region$$Table)
     Region$$Table$$Limit                     0x00001aa8   Number         0  anon$$obj.o(Region$$Table)
-    SystemCoreClock                          0x20000000   Data           4  system_tm4c123.o(.data.SystemCoreClock)
-    usr_button_config                        0x20000004   Data           5  button_config.o(.data.usr_button_config)
-    usr_led_config                           0x20000009   Data          15  led_config.o(.data.usr_led_config)
-    usr_systick_config                       0x20000018   Data           8  systick_config.o(.data.usr_systick_config)
+    usr_button_config                        0x20000000   Data           5  button_config.o(.data.usr_button_config)
+    usr_led_config                           0x20000005   Data          15  led_config.o(.data.usr_led_config)
+    usr_systick_config                       0x20000014   Data           8  systick_config.o(.data.usr_systick_config)
     __libspace_start                         0x20000020   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000080   Data           0  libspace.o(.bss)
 
@@ -826,8 +825,7 @@ Memory Map of the image
     0x00001658   0x00001658   0x00000028   Code   RO           37    .text.LED_RedOn     led.o
     0x00001680   0x00001680   0x0000003e   Code   RO           35    .text.Led_Init      led.o
     0x000016be   0x000016be   0x00000002   PAD
-    0x000016c0   0x000016c0   0x0000005e   Code   RO          104    .text.SYSTICK_Delay_ms  systick.o
-    0x0000171e   0x0000171e   0x00000002   PAD
+    0x000016c0   0x000016c0   0x00000060   Code   RO          104    .text.SYSTICK_Delay_ms  systick.o
     0x00001720   0x00001720   0x0000002a   Code   RO          106    .text.SYSTICK_GetStatus  systick.o
     0x0000174a   0x0000174a   0x00000002   PAD
     0x0000174c   0x0000174c   0x0000007c   Code   RO           94    .text.SYSTICK_Init  systick.o
@@ -849,16 +847,16 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00001aa8   0x00000004   Data   RW          137    .data.SystemCoreClock  system_tm4c123.o
-    0x20000004   0x00001aac   0x00000005   Data   RW           74    .data.usr_button_config  button_config.o
-    0x20000009   0x00001ab1   0x0000000f   Data   RW           54    .data.usr_led_config  led_config.o
-    0x20000018   0x00001ac0   0x00000008   Data   RW          116    .data.usr_systick_config  systick_config.o
+    0x20000000   0x00001aa8   0x00000005   Data   RW           74    .data.usr_button_config  button_config.o
+    0x20000005   0x00001aad   0x0000000f   Data   RW           54    .data.usr_led_config  led_config.o
+    0x20000014   0x00001abc   0x00000008   Data   RW          116    .data.usr_systick_config  systick_config.o
+    0x2000001c   0x00001ac4   0x00000004   PAD
     0x20000020        -       0x00000060   Zero   RW          204    .bss                c_w.l(libspace.o)
     0x20000080        -       0x00000002   Zero   RW           66    .bss.debounceCount  button.o
     0x20000082        -       0x00000001   Zero   RW           84    .bss.g_APP_ButtonState  application.o
     0x20000083        -       0x00000001   Zero   RW           85    .bss.g_APP_SequenceState  application.o
     0x20000084        -       0x00000001   Zero   RW          108    .bss.g_SYSTICK_InitStatus  systick.o
-    0x20000085   0x00001ac8   0x00000001   PAD
+    0x20000085   0x00001ac4   0x00000001   PAD
     0x20000086        -       0x00000002   Zero   RW           86    .bss.temp           application.o
     0x20000088        -       0x00000000   Zero   RW          122    HEAP                startup_tm4c123.o
     0x20000088        -       0x00000200   Zero   RW          121    STACK               startup_tm4c123.o
@@ -879,14 +877,14 @@ Image component sizes
          0          0          0         15          0       1088   led_config.o
         20          0          0          0          0        344   main.o
        276         24        620          0        512       5456   startup_tm4c123.o
-       268          0          0          4          0       6717   system_tm4c123.o
-       310          0          0          0          1       2016   systick.o
+       268          0          0          0          0       6717   system_tm4c123.o
+       312          0          0          0          1       2042   systick.o
          0          0          0          8          0        667   systick_config.o
 
     ----------------------------------------------------------------------
-      5220         42        986         32        520      26021   Object Totals
+      5220         42        986         28        524      26047   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        20          0          3          0          1          0   (incl. Padding)
+        18          0          3          0          5          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -943,15 +941,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      5838        134        986         32        616      26649   Grand Totals
-      5838        134        986         32        616      26649   ELF Image Totals
-      5838        134        986         32          0          0   ROM Totals
+      5838        134        986         28        620      26675   Grand Totals
+      5838        134        986         28        620      26675   ELF Image Totals
+      5838        134        986         28          0          0   ROM Totals
 
 ==============================================================================
 
     Total RO  Size (Code + RO Data)                 6824 (   6.66kB)
     Total RW  Size (RW Data + ZI Data)               648 (   0.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       6856 (   6.70kB)
+    Total ROM Size (Code + RO Data + RW Data)       6852 (   6.69kB)
 
 ==============================================================================
 
