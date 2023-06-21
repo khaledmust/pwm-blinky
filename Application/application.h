@@ -5,6 +5,8 @@
 #include "led_config.h"
 #include "button.h"
 #include "button_config.h"
+#include "systick.h"
+#include "systick_config.h"
 
 /**
  * @brief Initializes all the ECUAL.

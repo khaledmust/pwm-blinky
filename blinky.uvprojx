@@ -52,7 +52,7 @@
           <OutputName>blinky</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button</IncludePath>
+              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button;.\MCAL\SYSTICK</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -493,6 +493,36 @@
               <FileName>application.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Application\application.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>SysTick</GroupName>
+          <Files>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\SYSTICK\systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\SYSTICK\systick.h</FilePath>
+            </File>
+            <File>
+              <FileName>systick_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\SYSTICK\systick_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\SYSTICK\systick_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>systick_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\SYSTICK\systick_private.h</FilePath>
             </File>
           </Files>
         </Group>
