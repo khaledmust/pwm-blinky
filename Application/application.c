@@ -19,7 +19,7 @@ void APP_Start(void) {
         case 1:
             if (temp == 0) {
                     LED_RedOn(usr_led_config);
-                SYSTICK_Delay_ms(0xffff);
+                SYSTICK_Delay_ms(10000);
                 LED_AllOff(usr_led_config);
             }
 
