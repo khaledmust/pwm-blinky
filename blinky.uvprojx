@@ -527,6 +527,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Timer</GroupName>
+          <Files>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\GPT\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\GPT\timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>timer_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\GPT\timer_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\GPT\timer_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>timer_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\GPT\timer_private.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>

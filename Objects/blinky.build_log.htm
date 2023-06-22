@@ -21,12 +21,21 @@ Target DLL:      lmidk-agdi.dll V???
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-D:\projects\systick-blinky\blinky.uvprojx
-Project File Date:  06/21/2023
+D:\projects\pwm-blinky\blinky.uvprojx
+Project File Date:  06/22/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
+compiling led_config.c...
+MCAL/SYSTICK/systick_config.c(1): warning: In file included from...
+./MCAL/SYSTICK/systick_config.h(4): warning: In file included from...
+./MCAL/SYSTICK/systick.h(28): warning: padding size of 'st_SYSTICK_config_t' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct {
+        ^
+1 warning generated.
+compiling systick_config.c...
+compiling main.c...
 MCAL/SYSTICK/systick.c(4): warning: In file included from...
 C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
 C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
@@ -191,6 +200,80 @@ MCAL/SYSTICK/systick.c(51): warning: implicit conversion changes signedness: 'in
                                         ~~ ^~~~~~~~~~~~~
 49 warnings generated.
 compiling systick.c...
+compiling button.c...
+MCAL/GPIO/GPIO.c(160): warning: non-void function does not return a value in all control paths [-Wreturn-type]
+}
+^
+1 warning generated.
+compiling GPIO.c...
+compiling button_config.c...
+MCAL/GPT/timer_config.c(1): warning: ISO C requires a translation unit to contain at least one declaration [-Wempty-translation-unit]
+1 warning generated.
+compiling timer_config.c...
+MCAL/GPT/timer.c(11): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    CLR_BIT(GPTMCTL(en_TIMER_TimerID),TAEN);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
+                                        ~~ ^~~~~~~~~~~~~
+MCAL/GPT/timer.c(31): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+            CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TAMR1);
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
+                                        ~~ ^~~~~~~~~~~~~
+MCAL/GPT/timer.c(36): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+            CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TAMR0);
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
+                                        ~~ ^~~~~~~~~~~~~
+MCAL/GPT/timer.c(47): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TACDIR);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
+                                        ~~ ^~~~~~~~~~~~~
+MCAL/GPT/timer.c(55): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+static void TIMER_ClearTimeroutFlat();
+                                   ^
+                                    void
+MCAL/GPT/timer.c(57): warning: no previous prototype for function 'TIMER_GetStatus' [-Wmissing-prototypes]
+en_TIMER_Status_t TIMER_GetStatus(en_TIMER_TimerID_t en_TIMER_TimerID) {
+                  ^
+MCAL/GPT/timer.c(57): note: declare 'static' if the function is not intended to be used outside of this translation unit
+en_TIMER_Status_t TIMER_GetStatus(en_TIMER_TimerID_t en_TIMER_TimerID) {
+^
+static 
+MCAL/GPT/timer.c(64): warning: non-void function does not return a value in all control paths [-Wreturn-type]
+}
+^
+MCAL/GPT/timer.c(67): warning: unused parameter 'st_TIMER_config' [-Wunused-parameter]
+void TIMER_Init(st_TIMER_config_t st_TIMER_config) {
+                                  ^
+MCAL/GPT/timer.c(6): warning: unused function 'TIMER_EnableTimerX' [-Wunused-function]
+static void TIMER_EnableTimerX(en_TIMER_TimerID_t en_TIMER_TimerID) {
+            ^
+MCAL/GPT/timer.c(10): warning: unused function 'TIMER_DisableTimerX' [-Wunused-function]
+static void TIMER_DisableTimerX(en_TIMER_TimerID_t en_TIMER_TimerID) {
+            ^
+MCAL/GPT/timer.c(14): warning: unused function 'TIMER_WidthSelect' [-Wunused-function]
+static void TIMER_WidthSelect(en_TIMER_TimerID_t en_TIMER_TimerID, en_TIMER_Width_t en_TIMER_Width) {
+            ^
+MCAL/GPT/timer.c(24): warning: unused function 'TIMER_LoadTimer' [-Wunused-function]
+static void TIMER_LoadTimer(en_TIMER_TimerID_t en_TIMER_TimerID, uint32 Period) {
+            ^
+MCAL/GPT/timer.c(28): warning: unused function 'TIMER_OperationMode' [-Wunused-function]
+static void TIMER_OperationMode(en_TIMER_TimerID_t en_TIMER_TimerID, en_TIMER_OperationMode_t en_TIMER_OperationMode) {
+            ^
+MCAL/GPT/timer.c(45): warning: unused function 'TIMER_CountDirection' [-Wunused-function]
+static void TIMER_CountDirection(en_TIMER_TimerID_t en_TIMER_TimerID, en_TIMER_CountDirection_t en_TIMER_CountDirection) {
+            ^
+MCAL/GPT/timer.c(55): warning: unused function 'TIMER_ClearTimeroutFlat' [-Wunused-function]
+static void TIMER_ClearTimeroutFlat();
+            ^
+15 warnings generated.
+compiling timer.c...
 Application/application.c(1): warning: In file included from...
 Application/application.h(8): warning: In file included from...
 ./MCAL/SYSTICK/systick.h(28): warning: padding size of 'st_SYSTICK_config_t' with 3 bytes to alignment boundary [-Wpadded]
@@ -201,10 +284,11 @@ Application/application.c(100): warning: no newline at end of file [-Wnewline-eo
    ^
 2 warnings generated.
 compiling application.c...
+compiling led.c...
 linking...
-Program Size: Code=5838 RO-data=986 RW-data=28 ZI-data=620  
+Program Size: Code=5814 RO-data=986 RW-data=28 ZI-data=620  
 FromELF: creating hex file...
-".\Objects\blinky.axf" - 0 Error(s), 51 Warning(s).
+".\Objects\blinky.axf" - 0 Error(s), 69 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -230,9 +314,9 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.1
+      Source file:   Device/Source/system_TM4C123.c
       Include file:  Device/Include/TM4C123/TM4C123.h
       Source file:   Device/Source/ARM/startup_TM4C123.s
-      Source file:   Device/Source/system_TM4C123.c
 Build Time Elapsed:  00:00:03
 </pre>
 </body>
