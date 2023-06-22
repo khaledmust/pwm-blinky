@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button;.\MCAL\SYSTICK</IncludePath>
+              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button;.\MCAL\SYSTICK;.\MCAL\GPT</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
