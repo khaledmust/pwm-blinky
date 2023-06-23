@@ -6,8 +6,6 @@
 ".\objects\button.o"
 ".\objects\button_config.o"
 ".\objects\application.o"
-".\objects\systick.o"
-".\objects\systick_config.o"
 ".\objects\timer.o"
 ".\objects\timer_config.o"
 ".\objects\startup_tm4c123.o"
