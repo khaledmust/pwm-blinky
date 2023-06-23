@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button;.\MCAL\SYSTICK</IncludePath>
+              <IncludePath>.\Utilities;.\MCAL\;.\ECUAL\LED;.\ECUAL\button;.\MCAL\SYSTICK;.\MCAL\GPT</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -497,32 +497,32 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>SysTick</GroupName>
+          <GroupName>Timer</GroupName>
           <Files>
             <File>
-              <FileName>systick.c</FileName>
+              <FileName>timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MCAL\SYSTICK\systick.c</FilePath>
+              <FilePath>.\MCAL\GPT\timer.c</FilePath>
             </File>
             <File>
-              <FileName>systick.h</FileName>
+              <FileName>timer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\MCAL\SYSTICK\systick.h</FilePath>
+              <FilePath>.\MCAL\GPT\timer.h</FilePath>
             </File>
             <File>
-              <FileName>systick_config.c</FileName>
+              <FileName>timer_config.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MCAL\SYSTICK\systick_config.c</FilePath>
+              <FilePath>.\MCAL\GPT\timer_config.c</FilePath>
             </File>
             <File>
-              <FileName>systick_config.h</FileName>
+              <FileName>timer_config.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\MCAL\SYSTICK\systick_config.h</FilePath>
+              <FilePath>.\MCAL\GPT\timer_config.h</FilePath>
             </File>
             <File>
-              <FileName>systick_private.h</FileName>
+              <FileName>timer_private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\MCAL\SYSTICK\systick_private.h</FilePath>
+              <FilePath>.\MCAL\GPT\timer_private.h</FilePath>
             </File>
           </Files>
         </Group>

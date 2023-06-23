@@ -10,6 +10,6 @@
 
 /* User configuration array. */
 st_GPIO_config_t usr_button_config [PUSH_BUTTON_NUM] = {
-    {PORT_F , PIN4 , INPUT , DRIVE_4mA , PULL_UP}
+    {PORT_F , PIN4 , INPUT , DRIVE_4mA , PULL_UP, INTERRUPT_ENABLE, EDGE_DETECTION, FALLING_EDGE}
 };
 

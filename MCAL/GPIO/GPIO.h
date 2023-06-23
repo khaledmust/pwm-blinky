@@ -3,6 +3,7 @@
 #define GPIO_H_
 #include "std_types.h"
 #include "common.h"
+#include "TM4C123.h"
 
 /**
  * @enum en_GPIO_port_t
@@ -44,15 +45,43 @@ typedef enum {
     PULL_UP = 0, PULL_DOWN = 1, OPEN_DRAIN = 2
 }en_GPIO_pull_t;
 
+/**
+ * @enum en_GPIO_SenseControl_t
+ * Specifies the sense control detection.
+ */
+typedef enum {
+    EDGE_DETECTION = 0, LEVEL_DETECTION = 1
+}en_GPIO_SenseControl_t;
+
+/**
+ * @enum en_GPIO_EdgeControl_t
+ * Specifies the level edge detection.
+ */
+typedef enum {
+    FALLING_EDGE = 0, RISING_EDGE = 1
+}en_GPIO_EdgeControl_t;
+
+/**
+ * @enum en_GPIO_InterruptState_t
+ * Specifies the interrupt state.
+ */
+typedef enum {
+    INTERRUPT_DISABLE = 0, INTERRUPT_ENABLE = 1
+}en_GPIO_InterruptState_t;
+
+/**
+ * @enum en_GPIO_error_t
+ * Specifies the error state of the GPIO API.
+ */
 typedef enum {
     GPIO_STATUS_SUCCESS                     =   100,
     GPIO_STATUS_CLOCK_FAILED                =   101,
     GPIO_STATUS_SET_DIRECTION_FAILED        =   102,
     GPIO_STATUS_SET_DRIVE_CURRENT_FAILED    =   103,
     GPIO_STATUS_SET_PULL_FAILED             =   104,
-    GPIO_STATUS_INVALID_PIN_DIR,
-    GPIO_STATUS_INVALID_PORT_NUM,
-    GPIO_STATUS_INVALID_CONFIG_ARRAY        =   105
+    GPIO_STATUS_INVALID_PIN_DIR             =   105,
+    GPIO_STATUS_INVALID_PORT_NUM            =   106,
+    GPIO_STATUS_INVALID_CONFIG_ARRAY        =   107
 }en_GPIO_error_t;
 
 /**
@@ -66,13 +95,22 @@ typedef enum {
  * Member 'en_GPIO_pinDir' sets the direction of the pin.
  * @var en_GPIO_pull
  * Member 'en_GPIO_pull; sets the pull state of the pin.
+ * @var en_GPIO_InterruptState
+ * Member 'en_GPIO_InterruptState' enables/disables the interrupt to the specifed pin.
+ * @var en_GPIO_SenseControl
+ * Member 'en_GPIO_SenseControl' sets the sense control between level detection and edge detection.
+ * @var en_GPIO_EdgeControl
+ * Memeber 'en_GPIO_EdgeControl' sets the edge detection to be either falling edge or rising edge.
  */
 typedef struct {
-    en_GPIO_port_t          en_GPIO_port;
-    en_GPIO_pin_t           en_GPIO_pin;
-    en_GPIO_pinDir_t        en_GPIO_pinDir;
-    en_GPIO_driveCurrent_t  en_GPIO_driveCurrent;
-    en_GPIO_pull_t          en_GPIO_pull;
+    en_GPIO_port_t              en_GPIO_port;
+    en_GPIO_pin_t               en_GPIO_pin;
+    en_GPIO_pinDir_t            en_GPIO_pinDir;
+    en_GPIO_driveCurrent_t      en_GPIO_driveCurrent;
+    en_GPIO_pull_t              en_GPIO_pull;
+    en_GPIO_InterruptState_t    en_GPIO_InterruptState;
+    en_GPIO_SenseControl_t      en_GPIO_SenseControl;
+    en_GPIO_EdgeControl_t       en_GPIO_EdgeControl;
 }st_GPIO_config_t;
 
 /**
@@ -101,5 +139,11 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
  */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);
+
+/**
+ * @brief Sets the call-back function of the port F interrupt.
+ * @param[in] fptr_CallbackFunc    Address of the call-back function.
+ */
+void GPIO_PortF_SetCallBack(void(*fptr_CallbackFunc)(void));
 
 #endif
