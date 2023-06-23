@@ -11,23 +11,23 @@
  */
 static void TIMER_EnableClock(en_TIMER_TimerID_t en_TIMER_TimerID) {
     switch(en_TIMER_TimerID) {
-        case TIMER0:
-            SET_BIT(RCGCTIMER, TIMER0);
+        case TIMER0_ID:
+            SET_BIT(RCGCTIMER, TIMER0_ID);
             break;
-        case TIMER1:
-            SET_BIT(RCGCTIMER, TIMER1);
+        case TIMER1_ID:
+            SET_BIT(RCGCTIMER, TIMER1_ID);
             break;
-        case TIMER2:
-            SET_BIT(RCGCTIMER, TIMER2);
+        case TIMER2_ID:
+            SET_BIT(RCGCTIMER, TIMER2_ID);
             break;
-        case TIMER3:
-            SET_BIT(RCGCTIMER, TIMER3);
+        case TIMER3_ID:
+            SET_BIT(RCGCTIMER, TIMER3_ID);
             break;
-        case TIMER4:
-            SET_BIT(RCGCTIMER, TIMER4);
+        case TIMER4_ID:
+            SET_BIT(RCGCTIMER, TIMER4_ID);
             break;
-        case TIMER5:
-            SET_BIT(RCGCTIMER, TIMER5);
+        case TIMER5_ID:
+            SET_BIT(RCGCTIMER, TIMER5_ID);
             break;
     }
 }

@@ -12,8 +12,10 @@
 #include "std_types.h"
 #include "GPIO/GPIO.h"
 #include "button_config.h"
+#include "timer.h"
+#include "timer_config.h"
 
-#define DEBOUNCE_THRESHOLD  9000 //9000
+#define DEBOUNCE_THRESHOLD  2 //9000
 
 typedef enum {
     BUTTON_NotPressed = 0, BUTTON_Pressed = 1

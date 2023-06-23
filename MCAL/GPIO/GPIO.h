@@ -3,6 +3,7 @@
 #define GPIO_H_
 #include "std_types.h"
 #include "common.h"
+#include "TM4C123.h"
 
 /**
  * @enum en_GPIO_port_t
@@ -45,6 +46,19 @@ typedef enum {
 }en_GPIO_pull_t;
 
 typedef enum {
+    EDGE_DETECTION = 0, LEVEL_DETECTION = 1
+}en_GPIO_SenseControl_t;
+
+typedef enum {
+    FALLING_EDGE = 0, RISING_EDGE = 1
+}en_GPIO_EdgeControl_t;
+
+typedef enum {
+    INTERRUPT_DISABLE = 0, INTERRUPT_ENABLE = 1
+}en_GPIO_InterruptState_t;
+
+
+typedef enum {
     GPIO_STATUS_SUCCESS                     =   100,
     GPIO_STATUS_CLOCK_FAILED                =   101,
     GPIO_STATUS_SET_DIRECTION_FAILED        =   102,
@@ -68,11 +82,14 @@ typedef enum {
  * Member 'en_GPIO_pull; sets the pull state of the pin.
  */
 typedef struct {
-    en_GPIO_port_t          en_GPIO_port;
-    en_GPIO_pin_t           en_GPIO_pin;
-    en_GPIO_pinDir_t        en_GPIO_pinDir;
-    en_GPIO_driveCurrent_t  en_GPIO_driveCurrent;
-    en_GPIO_pull_t          en_GPIO_pull;
+    en_GPIO_port_t              en_GPIO_port;
+    en_GPIO_pin_t               en_GPIO_pin;
+    en_GPIO_pinDir_t            en_GPIO_pinDir;
+    en_GPIO_driveCurrent_t      en_GPIO_driveCurrent;
+    en_GPIO_pull_t              en_GPIO_pull;
+    en_GPIO_InterruptState_t    en_GPIO_InterruptState;
+    en_GPIO_SenseControl_t      en_GPIO_SenseControl;
+    en_GPIO_EdgeControl_t       en_GPIO_EdgeControl;
 }st_GPIO_config_t;
 
 /**
@@ -101,5 +118,6 @@ en_GPIO_error_t GPIO_ReadPin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8_t
  */
 en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 pinValue);
 void GPIO_TogglePin(const st_GPIO_config_t *ptr_st_GPIO_config);
+void GPIO_PortF_SetCallBack(void(*fptr_CallbackFunc)(void));
 
 #endif

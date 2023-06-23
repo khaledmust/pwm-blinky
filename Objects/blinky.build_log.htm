@@ -27,8 +27,10 @@ Project File Date:  06/22/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(6): warning: In file included from...
+Application/application.c(1): warning: In file included from...
+Application/application.h(4): warning: In file included from...
+./ECUAL/LED\led.h(13): warning: In file included from...
+./MCAL\GPIO/GPIO.h(6): warning: In file included from...
 C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
 C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
   union {
@@ -162,346 +164,39 @@ C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C12
 C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1251): warning: anonymous unions are a C11 extension [-Wc11-extensions]
   union {
   ^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(9): error: initializer element is not a compile-time constant
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
-              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./MCAL/GPT\timer.h(9): warning: no previous extern declaration for non-static variable 'temp' [-Wmissing-variable-declarations]
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
-       ^
-./MCAL/GPT\timer.h(9): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
+Application/application.c(1): warning: In file included from...
+Application/application.h(6): warning: In file included from...
+./ECUAL/button/button.h(16): warning: In file included from...
+./MCAL/GPT\timer_config.h(8): warning: no newline at end of file [-Wnewline-eof]
+#endif /* TIMER_CONFIG_H_ */
+                            ^
+Application/application.c(6): warning: no previous extern declaration for non-static variable 'flag' [-Wmissing-variable-declarations]
+uint8 flag = 0;
+      ^
+Application/application.c(6): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8 flag = 0;
 ^
-./MCAL/GPT\timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                 ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1636): note: expanded from macro 'TIMER1'
-#define TIMER1                          ((TIMER0_Type             *) TIMER1_BASE)
-                                        ^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                             ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1637): note: expanded from macro 'TIMER2'
-#define TIMER2                          ((TIMER0_Type             *) TIMER2_BASE)
-                                        ^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                         ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1638): note: expanded from macro 'TIMER3'
-#define TIMER3                          ((TIMER0_Type             *) TIMER3_BASE)
-                                        ^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                                     ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1639): note: expanded from macro 'TIMER4'
-#define TIMER4                          ((TIMER0_Type             *) TIMER4_BASE)
-                                        ^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                                                 ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1640): note: expanded from macro 'TIMER5'
-#define TIMER5                          ((TIMER0_Type             *) TIMER5_BASE)
-                                        ^
-main.c(23): error: initializer element is not a compile-time constant
-    .Period                     = temp,
-                                  ^~~~
-main.c(19): warning: no previous extern declaration for non-static variable 'myTimerConfig' [-Wmissing-variable-declarations]
-st_TIMER_config_t myTimerConfig = {
-                  ^
-main.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-st_TIMER_config_t myTimerConfig = {
-^
-main.c(3): warning: In file included from...
-./MCAL/GPT\timer.h(36): warning: padding struct 'st_TIMER_config_t' with 1 byte to align 'Period' [-Wpadded]
+Application/application.c(1): warning: In file included from...
+Application/application.h(6): warning: In file included from...
+./ECUAL/button/button.h(15): warning: In file included from...
+./MCAL/GPT/timer.h(31): warning: padding struct 'st_TIMER_config_t' with 1 byte to align 'Period' [-Wpadded]
     uint32                      Period;
                                 ^
-./MCAL/GPT\timer.h(32): warning: padding size of 'st_TIMER_config_t' with 3 bytes to alignment boundary [-Wpadded]
+./MCAL/GPT/timer.h(27): warning: padding size of 'st_TIMER_config_t' with 3 bytes to alignment boundary [-Wpadded]
 typedef struct {
         ^
-48 warnings and 7 errors generated.
-compiling main.c...
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(6): warning: In file included from...
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(338): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(357): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(713): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(729): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(774): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(779): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(872): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(885): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(892): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(897): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(904): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(910): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(917): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(924): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(929): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(936): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(942): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(949): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(956): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(961): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(968): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(974): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(981): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(988): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(993): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1000): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1006): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1013): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1020): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1025): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1032): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1038): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1045): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1052): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1057): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1064): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1070): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1077): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1084): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1089): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1096): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1102): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1251): warning: anonymous unions are a C11 extension [-Wc11-extensions]
-  union {
-  ^
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(9): error: initializer element is not a compile-time constant
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
-              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./MCAL/GPT/timer.h(9): warning: no previous extern declaration for non-static variable 'temp' [-Wmissing-variable-declarations]
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
-       ^
-./MCAL/GPT/timer.h(9): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint32 temp = ((SystemCoreClock) / (1000) - 1);
-^
-./MCAL/GPT/timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                 ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1636): note: expanded from macro 'TIMER1'
-#define TIMER1                          ((TIMER0_Type             *) TIMER1_BASE)
-                                        ^
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                             ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1637): note: expanded from macro 'TIMER2'
-#define TIMER2                          ((TIMER0_Type             *) TIMER2_BASE)
-                                        ^
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                         ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1638): note: expanded from macro 'TIMER3'
-#define TIMER3                          ((TIMER0_Type             *) TIMER3_BASE)
-                                        ^
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                                     ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1639): note: expanded from macro 'TIMER4'
-#define TIMER4                          ((TIMER0_Type             *) TIMER4_BASE)
-                                        ^
-MCAL/GPT/timer.c(1): warning: In file included from...
-./MCAL/GPT/timer.h(25): error: expected identifier
-    TIMER00 = 0, TIMER1 = 1, TIMER2 = 2, TIMER3 = 3, TIMER4 = 4, TIMER5 = 5
-                                                                 ^
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1640): note: expanded from macro 'TIMER5'
-#define TIMER5                          ((TIMER0_Type             *) TIMER5_BASE)
-                                        ^
-MCAL/GPT/timer.c(14): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER0:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1635): note: expanded from macro 'TIMER0'
-#define TIMER0                          ((TIMER0_Type             *) TIMER0_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(15): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER0);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(17): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER1:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1636): note: expanded from macro 'TIMER1'
-#define TIMER1                          ((TIMER0_Type             *) TIMER1_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(18): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER1);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(20): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER2:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1637): note: expanded from macro 'TIMER2'
-#define TIMER2                          ((TIMER0_Type             *) TIMER2_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(21): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER2);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(23): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER3:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1638): note: expanded from macro 'TIMER3'
-#define TIMER3                          ((TIMER0_Type             *) TIMER3_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(24): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER3);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(26): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER4:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1639): note: expanded from macro 'TIMER4'
-#define TIMER4                          ((TIMER0_Type             *) TIMER4_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(27): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER4);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(29): error: integer constant expression must have integer type, not 'TIMER0_Type *'
-        case TIMER5:
-             ^~~~~~
-C:/Users/khale/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(1640): note: expanded from macro 'TIMER5'
-#define TIMER5                          ((TIMER0_Type             *) TIMER5_BASE)
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPT/timer.c(30): error: invalid operands to binary expression ('int' and 'TIMER0_Type *')
-            SET_BIT(RCGCTIMER, TIMER5);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(37): note: expanded from macro 'SET_BIT'
-#define SET_BIT(reg,bit_num)        (reg|=(1<<bit_num))
-                                           ~^ ~~~~~~~
-MCAL/GPT/timer.c(48): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
-    CLR_BIT(GPTMCTL(en_TIMER_TimerID),TAEN);
-    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
-#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
-                                        ~~ ^~~~~~~~~~~~~
-MCAL/GPT/timer.c(83): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
-            CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TAMR1);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
-#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
-                                        ~~ ^~~~~~~~~~~~~
-MCAL/GPT/timer.c(88): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
-            CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TAMR0);
-            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
-#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
-                                        ~~ ^~~~~~~~~~~~~
-MCAL/GPT/timer.c(104): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
-        CLR_BIT(GPTMTAMR(en_TIMER_TimerID), TACDIR);
-        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./Utilities\common.h(38): note: expanded from macro 'CLR_BIT'
-#define CLR_BIT(reg,bit_num)        (reg&=(~(1<<bit_num)))
-                                        ~~ ^~~~~~~~~~~~~
-49 warnings and 18 errors generated.
-compiling timer.c...
-".\Objects\blinky.axf" - 25 Error(s), 97 Warning(s).
+Application/application.c(118): warning: no newline at end of file [-Wnewline-eof]
+//}
+   ^
+Application/application.c(4): warning: unused variable 'g_APP_ButtonState' [-Wunused-variable]
+en_button_state_t static g_APP_ButtonState = 0;
+                         ^
+50 warnings generated.
+compiling application.c...
+linking...
+Program Size: Code=6298 RO-data=986 RW-data=44 ZI-data=620  
+FromELF: creating hex file...
+".\Objects\blinky.axf" - 0 Error(s), 50 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -527,11 +222,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.1
-      Source file:   Device/Source/system_TM4C123.c
       Include file:  Device/Include/TM4C123/TM4C123.h
       Source file:   Device/Source/ARM/startup_TM4C123.s
-Target not created.
-Build Time Elapsed:  00:00:03
+      Source file:   Device/Source/system_TM4C123.c
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

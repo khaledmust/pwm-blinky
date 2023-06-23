@@ -10,6 +10,8 @@
 #define MIN_PCTL_VAL        (uint8_t)(1)
 #define MAX_PCTL_VAL        (uint8_t)(15)
 
+static void(*g_fptr_GPIO_PortF_CallbackFunc)(void) = NULL;
+
 /**
  * @brief Enables the clock source to the GPIO module.
  * @param[in] en_GPIO_port      Port number to be configured.
@@ -111,6 +113,36 @@ static en_GPIO_error_t GPIO_DigitalEnable(en_GPIO_port_t en_GPIO_port, en_GPIO_p
     return GPIO_STATUS_SUCCESS;
 }
 
+static void GPIO_SetInterruptState(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_InterruptState_t en_GPIO_InterruptState) {
+    if (en_GPIO_InterruptState == INTERRUPT_ENABLE) {
+        SET_BIT(GPIOIM(en_GPIO_port), en_GPIO_pin);
+        NVIC_EnableIRQ(GPIOF_IRQn);
+        __enable_irq();
+    } else if (en_GPIO_InterruptState == INTERRUPT_DISABLE) {
+        CLR_BIT(GPIOIM(en_GPIO_port), en_GPIO_pin);
+    }
+}
+
+static void GPIO_SetSenseControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_SenseControl_t en_GPIO_SenseControl) {
+    if (en_GPIO_SenseControl == EDGE_DETECTION) {
+        CLR_BIT(GPIOIS(en_GPIO_port), en_GPIO_pin);
+    } else if (en_GPIO_SenseControl == LEVEL_DETECTION) {
+        SET_BIT(GPIOIS(en_GPIO_port), en_GPIO_pin);
+    }
+}
+
+static void GPIO_SetEdgeControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_EdgeControl_t en_GPIO_EdgeControl) {
+    if (en_GPIO_EdgeControl == FALLING_EDGE) {
+        CLR_BIT(GPIOIEV(en_GPIO_port), en_GPIO_pin);
+    } else if (en_GPIO_EdgeControl == RISING_EDGE) {
+        SET_BIT(GPIOIEV(en_GPIO_port), en_GPIO_pin);
+    }
+}
+
+static void GPIO_ClearInterruptFlag(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin) {
+    SET_BIT(GPIOICR(en_GPIO_port), en_GPIO_pin);
+}
+
 /**
  * @brief Initializes a set of pins with the specified configuration.
  * @param[in] ptr_st_GPIO_config    Address of the array of the specified pins.
@@ -151,6 +183,21 @@ en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
         en_GPIO_error_CurrentError = GPIO_DigitalEnable(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin);
         if (en_GPIO_error_CurrentError != GPIO_STATUS_SUCCESS) {
             return en_GPIO_error_CurrentError;
+        }
+        
+        /* 6. Configure the interrupt. */
+        if (ptr_st_GPIO_config->en_GPIO_InterruptState == INTERRUPT_ENABLE) {
+            /* 6.1 Disable the interrupt to prevent accidental triggerring. */
+            GPIO_SetInterruptState(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, INTERRUPT_DISABLE);
+            /* 6.2 Configure the sense control and edge control of the pin. */
+            GPIO_SetSenseControl(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_SenseControl);
+            GPIO_SetEdgeControl(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_EdgeControl);
+            /* 6.3 Clear the interrupt flag. */
+            GPIO_ClearInterruptFlag(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin);
+            /* 6.4 Set the call-back function. */
+            
+            /* 6.5 Enable the interrupt. */
+            GPIO_SetInterruptState(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, INTERRUPT_ENABLE);
         }
         return GPIO_STATUS_SUCCESS;
     } else {
@@ -276,4 +323,15 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
         return GPIO_STATUS_INVALID_PIN_DIR;
     }
     return GPIO_STATUS_SUCCESS;
+}
+
+void GPIO_PortF_SetCallBack(void(*fptr_CallbackFunc)(void)) {
+    g_fptr_GPIO_PortF_CallbackFunc = fptr_CallbackFunc;
+}
+
+void GPIOF_Handler(void) {
+    if (g_fptr_GPIO_PortF_CallbackFunc != NULL) {
+        g_fptr_GPIO_PortF_CallbackFunc();
+    }
+    GPIO_ClearInterruptFlag(PORT_F, PIN4);
 }

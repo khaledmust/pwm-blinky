@@ -7,6 +7,8 @@
 #include "button_config.h"
 #include "systick.h"
 #include "systick_config.h"
+#include "timer.h"
+#include "timer_config.h"
 
 /**
  * @brief Initializes all the ECUAL.

@@ -2,65 +2,83 @@
 
 uint8 static g_APP_SequenceState = 0;
 en_button_state_t static g_APP_ButtonState = 0;
-uint16 static temp = 0;
+
+uint8 flag = 0;
+
+static void ButtonInterrupt(void) {
+        g_APP_SequenceState++;
+}
+
+
+
 void APP_Init(void) {
     Led_Init(usr_led_config);
     BUTTON_Init(usr_button_config);
-    SYSTICK_Init(&usr_systick_config);
+    TIMER_Init(&myTimerConfig);
+    GPIO_PortF_SetCallBack(ButtonInterrupt);
 }
 
 void APP_Start(void) {
-    BUTTON_IsPressed(&usr_button_config[0], &g_APP_ButtonState);
-    if (g_APP_ButtonState == BUTTON_Pressed) {
-        g_APP_SequenceState++;
-        temp = 0;
-    }
     switch (g_APP_SequenceState) {
         case 1:
-            if (temp == 0) {
-                    LED_RedOn(usr_led_config);
-                SYSTICK_Delay_ms(10000);
-                LED_AllOff(usr_led_config);
-            }
-
-            temp = 1;
+            LED_GreenOn(usr_led_config);
+            TIMER_DelayMS(&myTimerConfig, 150);
+            LED_AllOff(usr_led_config);
+            TIMER_DelayMS(&myTimerConfig, 350);
             break;
         case 2:
-            if (temp == 0) {
-                LED_GreenOn(usr_led_config);
-                SYSTICK_Delay_ms(10000);
-                LED_AllOff(usr_led_config);
-            }
-
-            temp = 1;
-     
+            LED_GreenOn(usr_led_config);
+            TIMER_DelayMS(&myTimerConfig, 300);
+            LED_AllOff(usr_led_config);
+            TIMER_DelayMS(&myTimerConfig, 200);
             break;
         case 3:
-            if (temp == 0) {
-                LED_BlueOn(usr_led_config);
-                SYSTICK_Delay_ms(10000);
+            LED_GreenOn(usr_led_config);
+                TIMER_DelayMS(&myTimerConfig, 450);
                 LED_AllOff(usr_led_config);
-            }
-
-            temp = 1;
+                TIMER_DelayMS(&myTimerConfig, 50);
             break;
         case 4:
-            if (temp == 0) {
-                LED_AllOn(usr_led_config);
-                SYSTICK_Delay_ms(10000);
-                LED_AllOff(usr_led_config);
-            }
-
-            temp = 1;
-            break;
-        case 5:
             LED_AllOff(usr_led_config);
             break;
-        case 6:
+        case 5:
             g_APP_SequenceState = 0;
-            break;
+        break;
     }
 }
+
+//void APP_Start(void) {
+//    BUTTON_IsPressed(&usr_button_config[0], &g_APP_ButtonState);
+//    if (g_APP_ButtonState == BUTTON_Pressed) {
+//        g_APP_SequenceState++;
+//    }
+//    switch (g_APP_SequenceState) {
+//        case 1:
+//            LED_GreenOn(usr_led_config);
+//            TIMER_DelayMS(&myTimerConfig, 150);
+//            LED_AllOff(usr_led_config);
+//            TIMER_DelayMS(&myTimerConfig, 350);
+//            break;
+//        case 2:
+//            LED_GreenOn(usr_led_config);
+//            TIMER_DelayMS(&myTimerConfig, 300);
+//            LED_AllOff(usr_led_config);
+//            TIMER_DelayMS(&myTimerConfig, 200);
+//            break;
+//        case 3:
+//            LED_GreenOn(usr_led_config);
+//                TIMER_DelayMS(&myTimerConfig, 450);
+//                LED_AllOff(usr_led_config);
+//                TIMER_DelayMS(&myTimerConfig, 50);
+//            break;
+//        case 4:
+//            LED_AllOff(usr_led_config);
+//            break;
+//        case 5:
+//            g_APP_SequenceState = 0;
+//        break;
+//    }
+//}
 
 //void APP_Start(void) {
 //    do {
