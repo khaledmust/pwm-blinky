@@ -1,15 +1,16 @@
 #include "application.h"
 
 uint8 static g_APP_SequenceState = 0;
-en_button_state_t static g_APP_ButtonState = 0;
 
-uint8 flag = 0;
+st_APP_Stages_t AppStages = {
+    .Stage_1.OnTime_ms = 150, .Stage_1.OffTime_ms = 350,
+    .Stage_2.OnTime_ms = 300, .Stage_2.OffTime_ms = 200,
+    .Stage_3.OnTime_ms = 450, .Stage_3.OffTime_ms = 50
+};
 
 static void ButtonInterrupt(void) {
         g_APP_SequenceState++;
 }
-
-
 
 void APP_Init(void) {
     Led_Init(usr_led_config);
@@ -20,99 +21,30 @@ void APP_Init(void) {
 
 void APP_Start(void) {
     switch (g_APP_SequenceState) {
-        case 1:
+        case STAGE_ONE:
             LED_GreenOn(usr_led_config);
-            TIMER_DelayMS(&myTimerConfig, 150);
+            TIMER_DelayMS(&myTimerConfig, AppStages.Stage_1.OnTime_ms);
             LED_AllOff(usr_led_config);
-            TIMER_DelayMS(&myTimerConfig, 350);
+            TIMER_DelayMS(&myTimerConfig, AppStages.Stage_1.OffTime_ms);
             break;
-        case 2:
+        case STAGE_TWO:
             LED_GreenOn(usr_led_config);
-            TIMER_DelayMS(&myTimerConfig, 300);
+            TIMER_DelayMS(&myTimerConfig, AppStages.Stage_2.OnTime_ms);
             LED_AllOff(usr_led_config);
-            TIMER_DelayMS(&myTimerConfig, 200);
+            TIMER_DelayMS(&myTimerConfig, AppStages.Stage_2.OffTime_ms);
             break;
-        case 3:
+        case STAGE_THREE:
             LED_GreenOn(usr_led_config);
-                TIMER_DelayMS(&myTimerConfig, 450);
+                TIMER_DelayMS(&myTimerConfig, AppStages.Stage_3.OnTime_ms);
                 LED_AllOff(usr_led_config);
-                TIMER_DelayMS(&myTimerConfig, 50);
+                TIMER_DelayMS(&myTimerConfig, AppStages.Stage_3.OffTime_ms);
             break;
-        case 4:
+        case STAGE_FOUR:
             LED_AllOff(usr_led_config);
             break;
-        case 5:
+        case STAGE_FIVE:
             g_APP_SequenceState = 0;
         break;
     }
 }
 
-//void APP_Start(void) {
-//    BUTTON_IsPressed(&usr_button_config[0], &g_APP_ButtonState);
-//    if (g_APP_ButtonState == BUTTON_Pressed) {
-//        g_APP_SequenceState++;
-//    }
-//    switch (g_APP_SequenceState) {
-//        case 1:
-//            LED_GreenOn(usr_led_config);
-//            TIMER_DelayMS(&myTimerConfig, 150);
-//            LED_AllOff(usr_led_config);
-//            TIMER_DelayMS(&myTimerConfig, 350);
-//            break;
-//        case 2:
-//            LED_GreenOn(usr_led_config);
-//            TIMER_DelayMS(&myTimerConfig, 300);
-//            LED_AllOff(usr_led_config);
-//            TIMER_DelayMS(&myTimerConfig, 200);
-//            break;
-//        case 3:
-//            LED_GreenOn(usr_led_config);
-//                TIMER_DelayMS(&myTimerConfig, 450);
-//                LED_AllOff(usr_led_config);
-//                TIMER_DelayMS(&myTimerConfig, 50);
-//            break;
-//        case 4:
-//            LED_AllOff(usr_led_config);
-//            break;
-//        case 5:
-//            g_APP_SequenceState = 0;
-//        break;
-//    }
-//}
-
-//void APP_Start(void) {
-//    do {
-//        BUTTON_IsPressed(&usr_button_config[0], &g_APP_ButtonState);
-//        if (g_APP_ButtonState == BUTTON_Pressed && g_APP_DebounceFlag == 0) {
-//            g_APP_SequenceState++;
-//            g_APP_DebounceFlag = 1;
-//        }
-//    } while (g_APP_ButtonState == BUTTON_NotPressed);
-//    
-//    switch (g_APP_SequenceState) {
-//        case 1:
-//            LED_RedOn(usr_led_config);
-//            g_APP_DebounceFlag = 0;
-//            break;
-//        case 2:
-//            LED_GreenOn(usr_led_config);
-//            g_APP_DebounceFlag = 0;
-//            break;
-//        case 3:
-//            LED_BlueOn(usr_led_config);
-//            g_APP_DebounceFlag = 0;
-//            break;
-//        case 4:
-//            LED_AllOn(usr_led_config);
-//            g_APP_DebounceFlag = 0;
-//            break;
-//        case 5:
-//            LED_AllOff(usr_led_config);
-//            g_APP_DebounceFlag = 0;
-//            break;
-//        case 6:
-//            g_APP_SequenceState = 0;
-//            g_APP_DebounceFlag = 0;
-//            break;
-//    }
-//}

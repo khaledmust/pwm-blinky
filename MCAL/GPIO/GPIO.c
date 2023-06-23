@@ -113,6 +113,13 @@ static en_GPIO_error_t GPIO_DigitalEnable(en_GPIO_port_t en_GPIO_port, en_GPIO_p
     return GPIO_STATUS_SUCCESS;
 }
 
+/**
+ * @brief Sets interrupt state of the GPIO pin.
+ * This also enables the global interrupt.
+ * @param[in] en_GPIO_port              Port number to be configured.
+ * @param[in] en_GPIO_pin               Pin number to be configured.
+ * @param[in] en_GPIO_InterruptState    State of the interrupt @see en_GPIO_InterruptState_t
+ */
 static void GPIO_SetInterruptState(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_InterruptState_t en_GPIO_InterruptState) {
     if (en_GPIO_InterruptState == INTERRUPT_ENABLE) {
         SET_BIT(GPIOIM(en_GPIO_port), en_GPIO_pin);
@@ -123,6 +130,12 @@ static void GPIO_SetInterruptState(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en
     }
 }
 
+/**
+ * @brief Sets the sense control of the GPIO pin.
+ * @param[in] en_GPIO_port              Port number to be configured.
+ * @param[in] en_GPIO_pin               Pin number to be configured.
+ * @param[in] en_GPIO_SenseControl      Specifies the sense control @see en_GPIO_SenseControl_t
+ */
 static void GPIO_SetSenseControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_SenseControl_t en_GPIO_SenseControl) {
     if (en_GPIO_SenseControl == EDGE_DETECTION) {
         CLR_BIT(GPIOIS(en_GPIO_port), en_GPIO_pin);
@@ -131,6 +144,12 @@ static void GPIO_SetSenseControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_G
     }
 }
 
+/**
+ * @brief Sets the edge detection level of the GPIO pin.
+ * @param[in] en_GPIO_port          Port number to be configured.
+ * @param[in] en_GPIO_pin           Pin number to be configured.
+ * @param[in] en_GPIO_EdgeControl   Specifies the edge detection @see en_GPIO_EdgeControl_t
+ */
 static void GPIO_SetEdgeControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin, en_GPIO_EdgeControl_t en_GPIO_EdgeControl) {
     if (en_GPIO_EdgeControl == FALLING_EDGE) {
         CLR_BIT(GPIOIEV(en_GPIO_port), en_GPIO_pin);
@@ -139,6 +158,11 @@ static void GPIO_SetEdgeControl(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GP
     }
 }
 
+/**
+ * @brief Clears the external interrupt flag.
+ * @param[in] en_GPIO_port          Port number to be configured.
+ * @param[in] en_GPIO_pin           Pin number to be configured.
+ */
 static void GPIO_ClearInterruptFlag(en_GPIO_port_t en_GPIO_port, en_GPIO_pin_t en_GPIO_pin) {
     SET_BIT(GPIOICR(en_GPIO_port), en_GPIO_pin);
 }
@@ -194,8 +218,7 @@ en_GPIO_error_t GPIO_Init(const st_GPIO_config_t *ptr_st_GPIO_config) {
             GPIO_SetEdgeControl(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, ptr_st_GPIO_config->en_GPIO_EdgeControl);
             /* 6.3 Clear the interrupt flag. */
             GPIO_ClearInterruptFlag(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin);
-            /* 6.4 Set the call-back function. */
-            
+            /* 6.4 TODO Set the call-back function. */
             /* 6.5 Enable the interrupt. */
             GPIO_SetInterruptState(ptr_st_GPIO_config->en_GPIO_port, ptr_st_GPIO_config->en_GPIO_pin, INTERRUPT_ENABLE);
         }
@@ -325,6 +348,10 @@ en_GPIO_error_t GPIO_WritePin(const st_GPIO_config_t *ptr_st_GPIO_config, uint8 
     return GPIO_STATUS_SUCCESS;
 }
 
+/**
+ * @brief Sets address of the call-back function for port F.
+ * @param[in] fptr_CallbackFunc    Address of the call-back function.
+ */
 void GPIO_PortF_SetCallBack(void(*fptr_CallbackFunc)(void)) {
     g_fptr_GPIO_PortF_CallbackFunc = fptr_CallbackFunc;
 }

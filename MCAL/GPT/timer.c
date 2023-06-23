@@ -2,8 +2,8 @@
 #include "timer_private.h"
 #include "common.h"
 
-#define TIMER_16_BITS_MAX_TICKS 0x10000 /* 65536 */
-#define TIMER_32_BITS_MAX_TICKS 0x100000000 /* 4294967296  */
+#define TIMER_16_BITS_MAX_TICKS 0x10000 /* 65536 = 2^16 */
+#define TIMER_32_BITS_MAX_TICKS 0x100000000 /* 4294967296 = 2^32 */
 
 /**
  * @brief Enables the clock access to the timer block.
